@@ -61,7 +61,16 @@ window.onload = function () {
 
     //draw img @postion from response
     function draw (data) {
-
+        var face = $("<img>").attr('src', 'img/test.png').attr('class', 'emoji').css(
+            {
+                "left": data[0].faceRectangle.left,
+                "top": data[0].faceRectangle.top,
+                "width" : data[0].faceRectangle.width
+            });
+        $('#result').append(face);
+        console.log(data[0].faceRectangle.left);
+        console.log(data[0].faceRectangle.top);
+        console.log(data[0].faceRectangle.width);
     }
 
 };

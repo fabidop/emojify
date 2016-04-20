@@ -17,4 +17,9 @@ input[type=file] {
     width: 90vw;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+}
+
+.emoji {
+    position: absolute;
 }
