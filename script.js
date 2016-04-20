@@ -61,18 +61,24 @@ window.onload = function () {
 
     //draw img @postion from response
     function draw (data) {
-        var face = $("<img>").attr('src', 'img/test.png').attr('class', 'emoji').css(
-            {
-                "left": data[0].faceRectangle.left,
-                "top": data[0].faceRectangle.top,
-                "width" : data[0].faceRectangle.width
-            });
-        $('#result').append(face);
-        console.log(data[0].faceRectangle.left);
-        console.log(data[0].faceRectangle.top);
-        console.log(data[0].faceRectangle.width);
+        for (var i = 0; i<data.length; i++) {
+            var face = $("<img>").attr('src', 'img/test.png').attr('class', 'emoji').css(
+                {
+                    "left": data[i].faceRectangle.left/scaleFactor(),
+                    "top": data[i].faceRectangle.top/scaleFactor(),
+                    "width" : data[i].faceRectangle.width/scaleFactor()
+                });
+            $('#result').append(face);
+            console.log ("scale = " + scaleFactor());
+        }
     }
 
+    //scale factor original img to displayed img
+    function scaleFactor () {
+        var img = document.getElementById("preview");
+        // console.log("Height",img.naturalHeight);
+        return img.naturalWidth/img.clientWidth;
+    }
 };
 
 
