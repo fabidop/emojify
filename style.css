@@ -1,6 +1,17 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 10vw;
+    background-color: deepskyblue;
+    color: whitesmoke;
+}
+
 #preview {
     width: 100%;
     object-fit: cover;
+    border: whitesmoke 4px solid;
+    border-radius: 20px;
+    box-sizing: border-box;
+    display: none;
 }
 
 input[type=file] {
@@ -23,3 +34,74 @@ input[type=file] {
 .emoji {
     position: absolute;
 }
+
+#upload {
+    margin-left: auto;
+    margin-right: auto;
+    width: 74vw;
+    margin-top: 20vw;
+}
+
+.btn {
+    border: whitesmoke 4px solid;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: deepskyblue;
+    z-index: 20;
+    display: none;
+}
+
+#overlay span {
+    padding: 5px;
+    border-radius: 5px;
+    color: #000;
+    background-color: #fff;
+    height:100px;
+    width:100px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:-50px;
+    margin-top:-50px;
+    display:block;
+}
+
+#save {
+    border: whitesmoke 4px solid;
+    border-radius: 20px;
+    margin-top: 10px;
+    text-align: center;
+    display: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#reload {
+    border: whitesmoke 4px solid;
+    border-radius: 20px;
+    margin-top: 10px;
+    text-align: center;
+    display: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/*
+#hashtags {
+    border: whitesmoke 4px solid;
+    border-radius: 20px;
+    margin-top: 10px;
+    display: none;
+    width: 100%;
+    box-sizing: border-box;
+}*/

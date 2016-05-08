@@ -2,6 +2,16 @@
 
 // den ganzen scheiss erst ausführen wenn alles geladen (sonst kann man noch nicht auf DOM Elemente zugreifen)
 window.onload = function () {
+    var save = document.getElementById('save');
+    save.onclick = function() {
+        screenshot();
+    };
+
+    var save = document.getElementById('reload');
+    save.onclick = function() {
+        location.reload();
+    };
+
 
     // call `readURL` function whenever user chooses image
     $('#file').change(function(){
@@ -14,7 +24,13 @@ window.onload = function () {
 
         reader.onload = function (e) {
             $('#preview').attr('src', e.target.result);
+            $('#overlay').css('display','initial');
             sendToMicrosoft(dataURItoBlob(e.target.result));
+            $('#upload').css('display','none');
+            $('#preview').css('display','initial');
+            //$('#hashtags').css('display','inherit');
+            $('#save').css('display','inherit');
+            $('#reload').css('display','inherit');
         };
 
         reader.readAsDataURL(input.files[0]);
@@ -41,11 +57,13 @@ window.onload = function () {
             .done(function (data) {
                 console.log("##### WEBREQUEST SUCCESS: RESPONSE: #####");
                 console.log(data);
+                $('#overlay').css('display','none');
                 draw(data);
             })
             .fail(function (jqXHR, textStatus, errorThrown) {
                 console.log("##### WEBREQUEST FAILED : Output: #####");
                 console.log(textStatus);
+                $('#overlay').css('display','none');
             });
     }
 
@@ -69,8 +87,29 @@ window.onload = function () {
                     "width" : data[i].faceRectangle.width/scaleFactor()
                 });
             $('#result').append(face);
-            console.log ("scale = " + scaleFactor());
+            console.log ("scale = " + scaleFactor())
         }
+    }
+
+    function screenshot() {
+        $('#save').css('display','none');
+        $('#reload').css('display','none');
+        var node = document.getElementById('result');
+        console.log("jumping in");
+
+        html2canvas(node, {
+            onrendered: function(canvas) {
+                canvas.toBlob(function(blob) {
+                    saveAs(blob, "image.png");
+                });
+                //var img = canvas.toDataURL("image/jpeg;base64;");
+                //document.getElementById("save").href = canvas.toDataURL("image/png").replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+                //window.location.href=img;
+                //document.body.appendChild(canvas);
+            }
+        });
+        $('#save').css('display','inherit');
+        $('#reload').css('display','inherit');
     }
 
     //scale factor original img to displayed img
