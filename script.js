@@ -62,7 +62,7 @@ window.onload = function () {
     //draw img @postion from response
     function draw (data) {
         for (var i = 0; i<data.length; i++) {
-            var face = $("<img>").attr('src', 'img/test.png').attr('class', 'emoji').css(
+            var face = $("<img>").attr('src', returnImgString(data[i])).attr('class', 'emoji').css(
                 {
                     "left": data[i].faceRectangle.left/scaleFactor(),
                     "top": data[i].faceRectangle.top/scaleFactor(),
@@ -79,6 +79,19 @@ window.onload = function () {
         // console.log("Height",img.naturalHeight);
         return img.naturalWidth/img.clientWidth;
     }
+
+    //return Img String to use
+    function returnImgString (person) {
+        return 'img/'+returnEmotion(person.scores)+'.png';
+    }
+
+    //return closest emotion value
+    function returnEmotion (scores) {
+        var max = Math.max.apply(null,Object.keys(scores).map(function(x){ return scores[x] }));
+        var emotion = Object.keys(scores).filter(function(x){ return scores[x] == max; })[0];
+        return emotion;
+    }
+
 };
 
 
